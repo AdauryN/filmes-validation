@@ -1,7 +1,7 @@
-#Descrição do Domínio
+# Descrição do Domínio
 
 
-##Entidades principais 
+## Entidades principais 
 
 1 -Usuário: 
 Um usuário representa uma pessoa que interage com o sistema. Cada usuário tem uma conta, onde pode realizar login e gerenciar suas preferências.
@@ -30,7 +30,7 @@ A API do IMDB fornece dados sobre os filmes, como o título, diretor, elenco, cl
 
 
 
-##Comportamentos e Regras de negócio
+## Comportamentos e Regras de negócio
 
 
 1 -Gerenciamento de conta: 
@@ -53,7 +53,7 @@ Outros usuários podem consultar as críticas que foram publicadas sobre cada fi
 O usuário pode acessar as listas personalizadas de filmes.
 
 
-##Linguagem Onipresente
+## Linguagem Onipresente
 
 Usuário: Pessoa que interage com o sistema, com uma conta pessoal.
 Conta: Área privada do usuário onde ele gerencia seus dados e atividades.
