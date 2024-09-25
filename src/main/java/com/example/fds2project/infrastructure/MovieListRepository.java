@@ -8,6 +8,5 @@ import java.util.List;
 
 @Repository
 public interface MovieListRepository extends JpaRepository<MovieList, Long>, MovieListRepositoryCustom {
-    // Define query methods using method naming conventions if needed
     List<MovieList> findByPrivacySetting(String privacySetting);
 }
