@@ -4,10 +4,8 @@ import com.example.fds2project.domain.MovieList;
 import com.example.fds2project.infrastructure.MovieListRepository;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
+//import org.springframework.beans.factory.annotation.Autowired;
 
-//@SpringBootTest
 public class MovieListSteps {
 
 //    @Autowired
