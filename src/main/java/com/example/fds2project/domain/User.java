@@ -1,6 +1,9 @@
 package com.example.fds2project.domain;
 
 import jakarta.persistence.*;
+import java.util.Set;
+import java.util.HashSet;
+
 
 @Entity
 @Table(name = "users")
@@ -20,6 +23,23 @@ public class User {
 
     // Default constructor
     public User() {
+    }
+
+    @ManyToMany
+    @JoinTable(
+            name = "user_favorite_persons",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "person_id")
+    )
+    private Set<Person> favoritePersons = new HashSet<>();
+
+    // Getters and setters for favoritePersons
+    public Set<Person> getFavoritePersons() {
+        return favoritePersons;
+    }
+
+    public void setFavoritePersons(Set<Person> favoritePersons) {
+        this.favoritePersons = favoritePersons;
     }
 
     // Constructor with parameters
