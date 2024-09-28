@@ -1,8 +1,6 @@
 package com.example.fds2project.domain;
 
 import jakarta.persistence.*;
-import java.util.Set;
-import java.util.HashSet;
 
 @Entity
 @Table(name = "persons")
@@ -25,4 +23,28 @@ public class Person {
         this.role = role;
     }
 
+    // Add getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
