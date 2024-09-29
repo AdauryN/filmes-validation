@@ -1,0 +1,69 @@
+ContextMap  {
+	type SYSTEM_LANDSCAPE
+  state AS_IS
+	
+	contains  UserManagement
+	contains  ContentManagement
+	contains  SocialFeatures
+	
+	UserManagement [U] -> [D] SocialFeatures
+	ContentManagement [U] -> [D] SocialFeatures
+	UserManagement [D] <- [U] ContentManagement
+
+}
+
+BoundedContext UserManagement{
+	Aggregate Usuario{
+		Entity Usuario{
+			aggregateRoot
+			
+			int id_usuario
+			String e_mail
+			String senha
+			String numero_contato
+		}
+	}
+	Aggregate Avaliacao{
+		Entity Avaliacao{
+			aggregateRoot
+			
+			int id_avaliacao
+			int id_usuario
+			int id_filme
+			int atuacao
+			int roteiro
+			int direcao
+			int efeitos_visuais
+		}
+	}
+}
+
+
+
+BoundedContext ContentManagement{
+	Aggregate Filme{
+		Entity Filme{
+			aggregateRoot
+			
+			int id_filme
+			String titulo
+			int ano
+			int media
+		}
+	}
+}
+
+
+BoundedContext SocialFeatures{
+	Aggregate Marcacao{
+		Entity Marcacao{
+			aggregateRoot
+			
+			int id_marcacao
+			int id_filme
+			int id_usuario_convidado
+			int id_usuario_dono
+			int data
+		}
+	}
+}
