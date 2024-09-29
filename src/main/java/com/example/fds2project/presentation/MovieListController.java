@@ -4,6 +4,7 @@ import com.example.fds2project.application.MovieListService;
 import com.example.fds2project.domain.MovieList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,34 +20,52 @@ public class MovieListController {
         this.service = service;
     }
 
-    @PostMapping
-    public ResponseEntity<MovieList> createMovieList(@RequestBody MovieList movieList) {
-        MovieList created = service.createMovieList(movieList);
-        return ResponseEntity.ok(created);
+    // Endpoint to create a new movie list
+    @PostMapping("/create")
+    public ResponseEntity<?> createMovieList(@RequestParam String listName, Authentication authentication) {
+        String username = authentication.getName();
+        try {
+            MovieList createdList = service.createList(username, listName);
+            return ResponseEntity.ok(createdList);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<MovieList> getMovieList(@PathVariable Long id) {
-        return service.getMovieList(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    // Endpoint to add a movie to a list
+    @PostMapping("/add-movie")
+    public ResponseEntity<?> addMovieToList(
+            @RequestParam String listName,
+            @RequestParam String movieTitle,
+            Authentication authentication) {
+        String username = authentication.getName();
+        try {
+            service.addMovieToList(username, listName, movieTitle);
+            return ResponseEntity.ok("Movie added to the list successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
+    // Endpoint to get all lists of the authenticated user
     @GetMapping
-    public ResponseEntity<List<MovieList>> getAllMovieLists() {
-        return ResponseEntity.ok(service.getAllMovieLists());
+    public ResponseEntity<?> getUserLists(Authentication authentication) {
+        String username = authentication.getName();
+        List<MovieList> lists = service.getUserLists(username);
+        return ResponseEntity.ok(lists);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<MovieList> updateMovieList(@PathVariable Long id, @RequestBody MovieList movieList) {
-        movieList.setId(id);
-        MovieList updated = service.updateMovieList(movieList);
-        return ResponseEntity.ok(updated);
+    // Endpoint to get a specific list by name
+    @GetMapping("/{listName}")
+    public ResponseEntity<?> getListByName(@PathVariable String listName, Authentication authentication) {
+        String username = authentication.getName();
+        MovieList list = service.getListByName(username, listName);
+        if (list != null) {
+            return ResponseEntity.ok(list);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMovieList(@PathVariable Long id) {
-        service.deleteMovieList(id);
-        return ResponseEntity.noContent().build();
-    }
+    // Additional endpoints can be added as needed
 }

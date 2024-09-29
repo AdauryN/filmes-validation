@@ -1,65 +1,71 @@
 package com.example.fds2project.domain;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.HashSet;
 
 @Entity
+@Table(name = "watch_parties")
 public class WatchParty {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String movieTitle;
+    private String name;
+    private LocalDateTime dateTime;
 
-    private LocalDateTime scheduledTime;
+    // Relationship with User (Host)
+    @ManyToOne
+    @JoinColumn(name = "host_id")
+    private User host;
 
-    @ManyToMany
-    @JoinTable(
-            name = "watchparty_participants",
-            joinColumns = @JoinColumn(name = "watchparty_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
-    )
-    private Set<User> participants = new HashSet<>();
+    // Relationship with Movie
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 
     // Constructors
-    public WatchParty() {
-    }
+    public WatchParty() {}
 
-    public WatchParty(String movieTitle, LocalDateTime scheduledTime) {
-        this.movieTitle = movieTitle;
-        this.scheduledTime = scheduledTime;
-    }
-
-    // Getter and Setter for 'participants'
-    public Set<User> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(Set<User> participants) {
-        this.participants = participants;
-    }
-
-    // Getters and setters for other fields
+    // Getters and Setters
     public Long getId() {
         return id;
     }
 
-    public String getMovieTitle() {
-        return movieTitle;
+    public String getName() {
+        return name;
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public LocalDateTime getScheduledTime() {
-        return scheduledTime;
+    public User getHost() {
+        return host;
     }
 
-    public void setScheduledTime(LocalDateTime scheduledTime) {
-        this.scheduledTime = scheduledTime;
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public void setHost(User host) {
+        this.host = host;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 }

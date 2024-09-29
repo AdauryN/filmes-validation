@@ -2,31 +2,45 @@ package com.example.fds2project.presentation;
 
 import com.example.fds2project.application.WatchPartyService;
 import com.example.fds2project.domain.WatchParty;
-import com.example.fds2project.domain.User;
-import com.example.fds2project.infrastructure.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
-@RequestMapping("/watch-parties")
+@RequestMapping("/api/watch-parties")
 public class WatchPartyController {
 
     @Autowired
     private WatchPartyService watchPartyService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @PostMapping
-    public WatchParty createWatchParty(@RequestBody WatchParty watchParty, @RequestParam Set<Long> participantIds) {
-        Set<User> participants = userRepository.findAllById(participantIds).stream().collect(Collectors.toSet());
-        watchParty.setParticipants(participants);
-        return watchPartyService.createWatchParty(watchParty);
+    // Endpoint to create a watch party
+    @PostMapping("/create")
+    public ResponseEntity<?> createWatchParty(
+            @RequestParam String partyName,
+            @RequestParam String movieTitle,
+            @RequestParam String dateTime, // Expecting format "yyyy-MM-ddTHH:mm"
+            Authentication authentication) {
+        String username = authentication.getName();
+        try {
+            LocalDateTime eventDateTime = LocalDateTime.parse(dateTime);
+            watchPartyService.createWatchParty(username, partyName, movieTitle, eventDateTime);
+            return ResponseEntity.ok("Watch Party created successfully.");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
-    // Additional endpoints
+    // Endpoint to get the user's watch parties
+    @GetMapping
+    public ResponseEntity<?> getUserWatchParties(Authentication authentication) {
+        String username = authentication.getName();
+        List<WatchParty> watchParties = watchPartyService.getUserWatchParties(username);
+        return ResponseEntity.ok(watchParties);
+    }
+
+    // Additional endpoints can be added as needed
 }

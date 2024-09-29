@@ -1,11 +1,13 @@
-#Favoritar um ator ou diretor 
+# Favoritar um ator ou diretor
 Funcionalidade: Favoritar um ator ou diretor
 
   Cenário: Usuário favorita um ator ou diretor com sucesso
-    Dado que o usuário está na página de detalhes de um ator ou diretor chamado "Adam Sandler"
-    Quando o usuário clica no botão "Favoritar"
-    Então o sistema deve exibir a mensagem "Christopher Nolan foi adicionado aos seus favoritos!"
-    E o nome "Christopher Nolan" deve aparecer na lista de pessoas favoritas do usuário
+    Dado que o usuário está autenticado como "testuser"
+    E que o ator ou diretor "Adam Sandler" com ID 1 existe no sistema
+    Quando o usuário favorita o ator ou diretor com ID 1
+    Então o sistema deve exibir a mensagem "Adam Sandler foi adicionado aos seus favoritos!"
+    E o nome "Adam Sandler" deve aparecer na lista de pessoas favoritas do usuário
+
 
 
 

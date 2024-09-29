@@ -1,42 +1,80 @@
 package com.example.fds2project.bdd;
 
+import com.example.fds2project.application.MovieListService;
+import com.example.fds2project.application.UserService;
 import com.example.fds2project.domain.MovieList;
-import com.example.fds2project.infrastructure.MovieListRepository;
+import com.example.fds2project.domain.User;
 import io.cucumber.java.en.*;
 import org.junit.Assert;
-//import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 public class MovieListSteps {
 
-//    @Autowired
-    private MovieListRepository repository;
+    @Autowired
+    private UserService userService;
 
-    private MovieList movieList;
-    private MovieList savedMovieList;
+    @Autowired
+    private MovieListService movieListService;
 
-    @Given("a user wants to create a movie list named {string}")
-    public void a_user_wants_to_create_a_movie_list_named(String name) {
-        movieList = new MovieList();
-        movieList.setName(name);
+    private User testUser;
+    private String responseMessage;
+    private Exception exception;
+
+    @Given("the user is authenticated as {string}")
+    public void the_user_is_authenticated_as(String username) {
+        // Register and authenticate the user
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword("password123");
+        user.setEmail(username + "@example.com");
+        try {
+            testUser = userService.registerUser(user);
+        } catch (Exception e) {
+            testUser = userService.findByUsername(username);
+        }
     }
 
-    @When("the user sets the privacy to {string}")
-    public void the_user_sets_the_privacy_to(String privacy) {
-        movieList.setPrivacySetting(privacy);
+    @When("the user creates a new list named {string}")
+    public void the_user_creates_a_new_list_named(String listName) {
+        try {
+            MovieList movieList = movieListService.createList(testUser.getUsername(), listName);
+            responseMessage = "List '" + listName + "' created successfully!";
+        } catch (Exception e) {
+            exception = e;
+        }
     }
 
-    @When("saves the movie list")
-    public void saves_the_movie_list() {
-        savedMovieList = repository.save(movieList);
+    @When("the user adds the movie {string} to the list {string}")
+    public void the_user_adds_the_movie_to_the_list(String movieTitle, String listName) {
+        try {
+            movieListService.addMovieToList(testUser.getUsername(), listName, movieTitle);
+        } catch (Exception e) {
+            exception = e;
+        }
     }
 
-    @Then("the movie list should be created successfully")
-    public void the_movie_list_should_be_created_successfully() {
-        Assert.assertNotNull(savedMovieList);
+    @Then("the system should display the message {string}")
+    public void the_system_should_display_the_message(String expectedMessage) {
+        if (exception != null) {
+            Assert.assertEquals(expectedMessage, exception.getMessage());
+        } else {
+            Assert.assertEquals(expectedMessage, responseMessage);
+        }
     }
 
-    @Then("assigned an ID")
-    public void assigned_an_id() {
-        Assert.assertNotNull(savedMovieList.getId());
+    @Then("the list {string} should appear in the user's lists")
+    public void the_list_should_appear_in_the_user_s_lists(String listName) {
+        List<MovieList> userLists = movieListService.getUserLists(testUser.getUsername());
+        boolean found = userLists.stream().anyMatch(list -> list.getName().equals(listName));
+        Assert.assertTrue(found);
+    }
+
+    @Then("the movie {string} should be in the list {string}")
+    public void the_movie_should_be_in_the_list(String movieTitle, String listName) {
+        MovieList movieList = movieListService.getListByName(testUser.getUsername(), listName);
+        boolean found = movieList.getMovies().stream().anyMatch(movie -> movie.getTitle().equals(movieTitle));
+        Assert.assertTrue(found);
     }
 }

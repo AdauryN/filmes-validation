@@ -1,11 +1,11 @@
 package com.example.fds2project.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
+@Table(name = "movie_lists")
 public class MovieList {
 
     @Id
@@ -13,13 +13,25 @@ public class MovieList {
     private Long id;
 
     private String name;
-    private String privacySetting;
 
-    // Constructors, getters, and setters
+    // Relationship with User
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
-    public MovieList() {
-    }
+    // Relationship with Movies
+    @ManyToMany
+    @JoinTable(
+            name = "movie_list_movies",
+            joinColumns = @JoinColumn(name = "movie_list_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
+    private Set<Movie> movies = new HashSet<>();
 
+    // Constructors
+    public MovieList() {}
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -28,8 +40,12 @@ public class MovieList {
         return name;
     }
 
-    public String getPrivacySetting() {
-        return privacySetting;
+    public User getUser() {
+        return user;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
     }
 
     public void setId(Long id) {
@@ -40,7 +56,11 @@ public class MovieList {
         this.name = name;
     }
 
-    public void setPrivacySetting(String privacySetting) {
-        this.privacySetting = privacySetting;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 }
