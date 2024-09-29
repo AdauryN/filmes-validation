@@ -68,7 +68,7 @@ public class WatchPartySteps {
         List<WatchParty> events = watchPartyService.getUserWatchParties(testUser.getUsername());
         LocalDateTime eventDateTime = LocalDateTime.parse(dateTime.replace(" ", "T"));
         boolean found = events.stream().anyMatch(wp ->
-                wp.getMovieTitle().equals(movieTitle) && wp.getDateTime().equals(eventDateTime)
+                wp.getMovie().equals(movieTitle) && wp.getDateTime().equals(eventDateTime)
         );
         Assert.assertTrue(found);
     }
