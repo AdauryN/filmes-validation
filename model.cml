@@ -6,9 +6,9 @@ ContextMap  {
 	contains  ContentManagement
 	contains  SocialFeatures
 	
-	UserManagement [U] -> [D] SocialFeatures
-	ContentManagement [U] -> [D] SocialFeatures
-	UserManagement [D] <- [U] ContentManagement
+	UserManagement Supplier-Customer SocialFeatures
+	ContentManagement [P] <-> [P] SocialFeatures
+	UserManagement [P] <-> [P] ContentManagement
 
 }
 
@@ -17,10 +17,44 @@ BoundedContext UserManagement{
 		Entity Usuario{
 			aggregateRoot
 			
-			int id_usuario
+			long id_usuario
+			String username
 			String e_mail
 			String senha
 			String numero_contato
+			-Perfil perfil
+		}
+		
+		ValueObject Perfil{
+			String nome
+			String sobrenome
+			String descricao
+		}
+		Service Profile{
+			void registerUser(@Perfil usuario);
+			void autenticar(@Usuario username, @Usuario senha);
+			void getperfil(@Usuario id_usuario);
+		}
+	}
+}
+
+
+
+BoundedContext ContentManagement{
+	Aggregate Filme{
+		Entity Filme{
+			aggregateRoot
+			
+			int id_filme
+			String titulo
+			date ano
+			int nota_media
+		}
+		
+		Service ContentServices{
+			void createMovie(@Filme filme);
+			void addReview(@Avaliacao avaliacao);
+			void scheduleWatchParty(@WatchParty watchParty);
 		}
 	}
 	Aggregate Avaliacao{
@@ -39,31 +73,17 @@ BoundedContext UserManagement{
 }
 
 
-
-BoundedContext ContentManagement{
-	Aggregate Filme{
-		Entity Filme{
-			aggregateRoot
-			
-			int id_filme
-			String titulo
-			int ano
-			int media
-		}
-	}
-}
-
-
 BoundedContext SocialFeatures{
-	Aggregate Marcacao{
-		Entity Marcacao{
+	Aggregate WatchParty{
+		Entity WatchParty{
 			aggregateRoot
 			
-			int id_marcacao
+			int id_WatchParty
 			int id_filme
 			int id_usuario_convidado
 			int id_usuario_dono
 			int data
 		}
-	}
+		
+		}
 }
