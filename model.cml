@@ -1,89 +1,133 @@
-ContextMap  {
-	type SYSTEM_LANDSCAPE
-  state AS_IS
-	
-	contains  UserManagement
-	contains  ContentManagement
-	contains  SocialFeatures
-	
-	UserManagement Supplier-Customer SocialFeatures
-	ContentManagement [P] <-> [P] SocialFeatures
-	UserManagement [P] <-> [P] ContentManagement
+ContextMap {
+    type SYSTEM_LANDSCAPE
+    state AS_IS
 
+    contains UserManagement
+    contains ContentManagement
+    contains SocialFeatures
+
+    UserManagement Supplier-Customer SocialFeatures
+    ContentManagement [P] <-> [P] SocialFeatures
+    UserManagement [P] <-> [P] ContentManagement
 }
 
-BoundedContext UserManagement{
-	Aggregate Usuario{
-		Entity Usuario{
-			aggregateRoot
-			
-			long id_usuario
-			String username
-			String e_mail
-			String senha
-			String numero_contato
-			-Perfil perfil
-		}
-		
-		ValueObject Perfil{
-			String nome
-			String sobrenome
-			String descricao
-		}
-		Service Profile{
-			void registerUser(@Perfil usuario);
-			void autenticar(@Usuario username, @Usuario senha);
-			void getperfil(@Usuario id_usuario);
-		}
-	}
+' User Management Bounded Context
+BOUNDED_CONTEXT(UserManagement) {
+    AGGREGATE(UserAggregate) {
+        ENTITY(User) {
+            + id : BIGINT
+            + username : VARCHAR(255)
+            + email : VARCHAR(255)
+            + password : VARCHAR(255)
+        }
+    }
+
+    AGGREGATE(FavoritePersonAggregate) {
+        ENTITY(FavoritePerson) {
+            + userId : BIGINT
+            + personId : BIGINT
+        }
+    }
+
+    SERVICE(UserService) {
+        + registerUser(username, email, password)
+        + authenticateUser(username, password)
+        + getUserProfile(userId)
+    }
+
+    SERVICE(FavoriteService) {
+        + addFavoritePerson(userId, personId)
+        + removeFavoritePerson(userId, personId)
+        + getFavoritePersons(userId)
+    }
 }
 
+' Content Management Bounded Context
+BOUNDED_CONTEXT(ContentManagement) {
+    AGGREGATE(MovieAggregate) {
+        ENTITY(Movie) {
+            + id : BIGINT
+            + title : VARCHAR(255)
+        }
+    }
 
+    AGGREGATE(MovieListAggregate) {
+        ENTITY(MovieList) {
+            + id : BIGINT
+            + name : VARCHAR(255)
+            + privacySetting : VARCHAR(255)
+            + userId : BIGINT
+        }
+    }
 
-BoundedContext ContentManagement{
-	Aggregate Filme{
-		Entity Filme{
-			aggregateRoot
-			
-			int id_filme
-			String titulo
-			date ano
-			int nota_media
-		}
-		
-		Service ContentServices{
-			void createMovie(@Filme filme);
-			void addReview(@Avaliacao avaliacao);
-			void scheduleWatchParty(@WatchParty watchParty);
-		}
-	}
-	Aggregate Avaliacao{
-		Entity Avaliacao{
-			aggregateRoot
-			
-			int id_avaliacao
-			int id_usuario
-			int id_filme
-			int atuacao
-			int roteiro
-			int direcao
-			int efeitos_visuais
-		}
-	}
+    AGGREGATE(ReviewAggregate) {
+        ENTITY(Review) {
+            + id : BIGINT
+            + content : VARCHAR(255)
+            + rating : INTEGER
+            + movieId : BIGINT
+            + userId : BIGINT
+        }
+    }
+
+    SERVICE(MovieService) {
+        + createMovie(title)
+        + getMovies()
+    }
+
+    SERVICE(MovieListService) {
+        + createList(name, privacySetting, userId)
+        + addMovieToList(listId, movieId)
+        + getUserMovieLists(userId)
+    }
+
+    SERVICE(ReviewService) {
+        + createReview(content, rating, movieId, userId)
+        + getMovieReviews(movieId)
+    }
 }
 
+' Social Features Bounded Context
+BOUNDED_CONTEXT(SocialFeatures) {
+    AGGREGATE(WatchPartyAggregate) {
+        ENTITY(WatchParty) {
+            + id : BIGINT
+            + movieTitle : VARCHAR(255)
+            + scheduledTime : TIMESTAMP
+            + hostId : BIGINT
+            + movieId : BIGINT
+        }
+    }
 
-BoundedContext SocialFeatures{
-	Aggregate WatchParty{
-		Entity WatchParty{
-			aggregateRoot
-			
-			int id_WatchParty
-			int id_filme
-			int id_usuario_convidado
-			int id_usuario_dono
-			int data
-		}
-		
-		}
+    AGGREGATE(WatchPartyParticipantAggregate) {
+        ENTITY(WatchPartyParticipant) {
+            + watchPartyId : BIGINT
+            + userId : BIGINT
+        }
+    }
+
+    AGGREGATE(PersonAggregate) {
+        ENTITY(Person) {
+            + id : BIGINT
+            + name : VARCHAR(255)
+            + role : VARCHAR(255)
+        }
+    }
+
+    SERVICE(WatchPartyService) {
+        + createWatchParty(name, movieId, scheduledTime, hostId)
+        + getUserWatchParties(userId)
+        + addParticipant(watchPartyId, userId)
+        + removeParticipant(watchPartyId, userId)
+    }
+
+    SERVICE(PersonService) {
+        + createPerson(name, role)
+        + getPersons()
+    }
 }
+
+' Define Relationships Between Bounded Contexts
+UserManagement -[hidden]-> ContentManagement
+UserManagement -[hidden]-> SocialFeatures
+ContentManagement -[hidden]-> SocialFeatures
