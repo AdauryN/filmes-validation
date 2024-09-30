@@ -1,50 +1,46 @@
 #Criar uma sessão de Watch Party
-Funcionalidade: Criar uma sessão de Watch Party
+Feature: Create a Watch Party session
 
-  Cenário: Usuário cria uma sessão de Watch Party com sucesso
-    Dado que o usuário está na página de detalhes do filme "Click"
-    Quando o usuário clica no botão "Criar Watch Party"
-    E o usuário preenche o campo "nome da sessão" com "Filme com amigos"
-    E o usuário define a data e horário da sessão para "25/12/2024 20:00"
-    E o usuário seleciona "Amigos" na lista de participantes
-    E o usuário clica no botão "Criar"
-    Então o sistema deve exibir a mensagem "Watch Party criada com sucesso!"
-    E a sessão deve estar listada na página de eventos do usuário
-    E a sessão deve exibir o nome "Filme com amigos"
-    E a sessão deve exibir a data e hora "25/12/2024 20:00"
-    E o número de participantes permitidos deve ser exibido
-
-
-
+  Scenario: User successfully creates a Watch Party session 
+  Given the user is on the movie "Click" details page
+  When the user clicks the "Create Watch Party" button
+  And the user fills in the "session name" field with "Movie with friends"
+  And the user sets the session date and time to "12/25/2024 8:00 PM"
+  And the user selects "Friends" from the participants list
+  And the user clicks the "Create" button
+  Then the system should display the message "Watch Party successfully created!"
+  And the session should be listed on the user's events page
+  And the session should display the name "Movie with friends"
+  And the session should display the date and time "12/25/2024 8:00 PM"
+  And the allowed number of participants should be displayed
+  
 #------------------------------------------------------------------------------------------------------------------------
 #Usuário cancela a criação da Watch Party
-Funcionalidade: Criar uma sessão de Watch Party
-
-  Cenário: Usuário cancela a criação da Watch Party
-    Dado que o usuário está na página de detalhes do filme "Click"
-    Quando o usuário clica no botão "Criar Watch Party"
-    E o usuário preenche o campo "nome da sessão" com "Filme com amigos"
-    E o usuário define a data e horário da sessão para "25/12/2024 20:00"
-    Quando o usuário clica no botão "Cancelar"
-    Então o sistema deve exibir a página de detalhes do filme "Click"
-    E a Watch Party não deve ser criada
-
-
-
+Feature: User cancels the Watch Party creation
+  
+  Scenario: User cancels the Watch Party creation
+  Given the user is on the movie "Click" details page
+  When the user clicks the "Create Watch Party" button
+  And the user fills in the "session name" field with "Movie with friends"
+  And the user sets the session date and time to "12/25/2024 8:00 PM"
+  When the user clicks the "Cancel" button
+  Then the system should display the movie "Click" details page
+  And the Watch Party should not be created
+  
 #------------------------------------------------------------------------------------------------------------------------
     #Verificar os detalhes da Watch Party criada
-    Funcionalidade: Verificar os detalhes da Watch Party criada
+    Feature: Check the details of the created Watch Party
+      Scenario: User checks the details of the Watch Party on the events page
+      Given the user has successfully created a Watch Party
+      And the "Movie with friends" session is listed on the events page
+      When the user clicks on the "Movie with friends" session
+      Then the system should display the session details
 
-  Cenário: Usuário verifica os detalhes da Watch Party na página de eventos
-    Dado que o usuário criou uma Watch Party com sucesso
-    E a sessão "Filme com amigos" está listada na página de eventos
-    Quando o usuário clica na sessão "Filme com amigos"
-    Então o sistema deve exibir os detalhes da sessão
-    E os detalhes devem incluir:
-      | Nome da Sessão   | Filme com amigos   |
-      | Filme            | Click        |
-      | Data e Horário   | 25/12/2024 20:00   |
-      | Participantes    | Amigos             |
-      | Status           | Pendente           |
-    E o usuário deve ter a opção de editar ou cancelar a sessão
-
+      And the details should include:
+        | Session Name     | Movie with friends |
+        | Movie            | Click              |
+        | Date and Time    | 12/25/2024 8:00 PM |
+        | Participants     | Friends            |
+        | Status           | Pending            |
+      
+      
