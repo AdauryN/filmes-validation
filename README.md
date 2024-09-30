@@ -28,17 +28,17 @@ The goal of the project is to provide a fun and easy-to-use tool for movie lover
 3. **Movie Lists**: Users can create and share movie lists, which can be set as public or private.
 4. **Watchparties**: Users can create events, invite other participants, and watch movies together in real-time, with live chat functionality to interact during the session.
 
-## Installation
+## LOFI Prototype
 
-TBA
+Link to [Figma](https://www.figma.com/design/n3PJ0gcBey07Vh1IxvJ0Yc/REQUISITOS-%26-VALIDATION?node-id=0-1&t=2oQCk3nFQhPiw02i-1)
 
 ## Technologies Used
 
 - **Frontend**: TBD
-- **Backend**: TBD
+- **Backend**: SpringBoot
 - **Database**: MongoDB
 - **External API**: IMDB API
-- **Others**: CSS for styling
+- **Others**: [Jira](https://cesar-team-je0lvctt.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-12&atlOrigin=eyJpIjoiN2EwMTc1ZTJmNGVhNDViMDllOWU1MzAzYTNkYTQ1NzgiLCJwIjoiaiJ9)
 
 ## Team
 
