@@ -1,27 +1,17 @@
-# Favoritar um ator ou diretor
-Funcionalidade: Favoritar um ator ou diretor
+Feature: Favorite an Actor or Director
 
-  Cenário: Usuário favorita um ator ou diretor com sucesso
-    Dado que o usuário está autenticado como "testuser"
-    E que o ator ou diretor "Adam Sandler" com ID 1 existe no sistema
-    Quando o usuário favorita o ator ou diretor com ID 1
-    Então o sistema deve exibir a mensagem "Adam Sandler foi adicionado aos seus favoritos!"
-    E o nome "Adam Sandler" deve aparecer na lista de pessoas favoritas do usuário
+  Scenario: User successfully favorites an actor or director
+    Given the user is authenticated as "testuser"
+    And the actor or director "Adam Sandler" with ID 1 exists in the system
+    When the user favorites the actor or director with ID 1
+    Then the system should display the message "Adam Sandler has been added to your favorites!"
+    And the name "Adam Sandler" should appear in the user's list of favorite people
 
+Feature: Notification of New Works by Favorite Actors or Directors
 
-
-
-#------------------------------------------------------------------------------------------------------------------------
-#Notificar novos filmes dos atores ou diretores favoritos do usuário
-Funcionalidade: Notificação de novas obras de atores ou diretores favoritos
-
-  Cenário: Usuário recebe notificação quando uma nova obra de um ator ou diretor favorito é adicionada
-    Dado que o usuário tem "Christopher Nolan" favoritado
-    E uma nova obra de "Christopher Nolan" é adicionada ao catálogo
-    Quando o sistema processa a nova obra
-    Então o usuário deve receber uma notificação com a mensagem "Uma nova obra de Christopher Nolan foi adicionada: Oppenheimer"
-    E a nova obra deve aparecer na lista de notificações do usuário
-
-
-
-
+  Scenario: User receives a notification when a new work by a favorite actor or director is added
+    Given the user has "Christopher Nolan" favorited
+    And a new work by "Christopher Nolan" is added to the catalog
+    When the system processes the new work
+    Then the user should receive a notification with the message "A new work by Christopher Nolan has been added: Oppenheimer"
+    And the new work should appear in the user's notification list
