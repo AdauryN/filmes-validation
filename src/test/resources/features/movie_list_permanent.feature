@@ -1,24 +1,20 @@
-#Criar Lista de Filmes
-Funcionalidade: Criação de Lista de Filmes
+Feature: Create Movie List
 
-  Cenário: Usuário cria uma lista de filmes com sucesso
-    Dado que o usuário está na página inicial do site
-    Quando o usuário clica no botão "Criar Nova Lista"
-    E o usuário preenche o campo "nome da lista" com "Meus Favoritos"
-    E o usuário adiciona o filme "Inception" à lista
-    E o usuário clica no botão "Salvar Lista"
-    Então o sistema deve exibir a mensagem "Lista criada com sucesso!"
-    E a lista "Meus Favoritos" deve aparecer na página de listas do usuário
+  Scenario: User successfully creates a movie list
+    Given the user is on the homepage
+    When the user clicks the "Create New List" button
+    And the user fills the "list name" field with "My Favorites"
+    And the user adds the movie "Inception" to the list
+    And the user clicks the "Save List" button
+    Then the system should display the message "List successfully created!"
+    And the list "My Favorites" should appear on the user's lists page
 
+Feature: Add Movies to a List
 
-#------------------------------------------------------------------------------------------------------------------------
-#Adicionar um filme a uma lista existente 
-Funcionalidade: Adicionar filmes a uma lista
-
-  Cenário: Usuário adiciona um filme a uma lista existente
-    Dado que o usuário está na página de detalhes do filme "Inception"
-    E o usuário tem uma lista chamada "Meus Favoritos"
-    Quando o usuário clica no botão "Adicionar à Lista"
-    E o usuário seleciona "Meus Favoritos"
-    Então o sistema deve exibir a mensagem "Filme adicionado à lista!"
-    E o filme "Inception" deve estar na lista "Meus Favoritos"
+  Scenario: User adds a movie to an existing list
+    Given the user is on the "Inception" movie details page
+    And the user has a list called "My Favorites"
+    When the user clicks the "Add to List" button
+    And the user selects "My Favorites"
+    Then the system should display the message "Movie added to the list!"
+    And the movie "Inception" should be in the "My Favorites" list
