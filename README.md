@@ -47,13 +47,13 @@ The team from CESAR School that made it possible:
 - Adaury Oliveira
 - Demetrius Souza
 - Israel Erlich
-- João Pedro A.
-- João Pedro B.
+- João Pedro Araújo
+- João Pedro Batista
 - Lucas Lucena
 - Mathews Ivo
 - Rafael Menezes
 - Théo Moura
-- Vinícius Paz
+- Vinícius Gonçalves
 
 ## License
 
