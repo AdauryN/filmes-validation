@@ -43,7 +43,7 @@ Link to [Figma](https://www.figma.com/design/n3PJ0gcBey07Vh1IxvJ0Yc/REQUISITOS-%
 
 ## Canva Presentation
 
-Link para os slides da apresentação feita em sala: [Canva](https://www.canva.com/design/DAGSQ5Kasjo/C1DfnRvoabI0re7fqAfTlQ/edit)
+Link to the slides presented in class: [Canva](https://www.canva.com/design/DAGSQ5Kasjo/C1DfnRvoabI0re7fqAfTlQ/edit)
 
 ## Team
 
