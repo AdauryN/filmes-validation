@@ -41,6 +41,10 @@ Link to [Figma](https://www.figma.com/design/n3PJ0gcBey07Vh1IxvJ0Yc/REQUISITOS-%
 - **BDD**: Cucumber Gherkin
 - **Others**: [Jira](https://cesar-team-je0lvctt.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-12&atlOrigin=eyJpIjoiN2EwMTc1ZTJmNGVhNDViMDllOWU1MzAzYTNkYTQ1NzgiLCJwIjoiaiJ9)
 
+## Canva Presentation
+
+Link para os slides da apresentação feita em sala: [Canva](https://www.canva.com/design/DAGSQ5Kasjo/C1DfnRvoabI0re7fqAfTlQ/edit)
+
 ## Team
 
 The team from CESAR School that made it possible, and each pair programming partners:
