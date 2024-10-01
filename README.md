@@ -43,9 +43,9 @@ Link to [Figma](https://www.figma.com/design/n3PJ0gcBey07Vh1IxvJ0Yc/REQUISITOS-%
 
 ## Team
 
-The team from CESAR School that made it possible:
+The team from CESAR School that made it possible, and each pair programming partners:
 
-- Adaury Oliveira
+- Adaury Oliveira - Théo Moura
 - Demetrius Souza
 - Israel Erlich
 - João Pedro Araújo
@@ -53,7 +53,6 @@ The team from CESAR School that made it possible:
 - Lucas Lucena
 - Mathews Ivo
 - Rafael Menezes
-- Théo Moura
 - Vinícius Gonçalves
 
 ## License
