@@ -49,7 +49,7 @@ Link to the slides presented in class: [Canva](https://www.canva.com/design/DAGS
 
 The team from CESAR School that made it possible, and each pair programming partners:
 
-- Adaury Oliveira - Théo Moura
+- Adaury Oliveira
 - Demetrius Souza
 - Israel Erlich
 - João Pedro Araújo
@@ -57,6 +57,7 @@ The team from CESAR School that made it possible, and each pair programming part
 - Lucas Lucena
 - Mathews Ivo
 - Rafael Menezes
+- Théo Moura
 - Vinícius Gonçalves
 
 ## License
