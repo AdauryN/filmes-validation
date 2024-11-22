@@ -1,0 +1,54 @@
+<nz-layout>
+  <nz-sider nzCollapsible nzWidth="200px" *ngIf=" !isUserLoggedIn">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/register">
+        <span nz-icon nzType="user"></span>
+        <span><strong>Registrar-se</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/">
+        <span nz-icon nzType="login"></span>
+        <span><strong>Login</strong></span>
+      </li>
+    </ul>
+  </nz-sider>
+
+  <nz-sider nzCollapsible nzWidth="200px" *ngIf="isUserLoggedIn">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item routerLink="/user/dashboard">
+        <span nz-icon nzType="usergroup-add"></span>
+        <span><strong>Explorar usuários</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/user/friends">
+        <span nz-icon nzType="user"></span>
+        <span><strong>Amigos</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/user/create-event">
+        <span nz-icon nzType="calendar"></span>
+        <span><strong>Hostear evento</strong></span>
+      </li>
+      <li nz-menu-item routerLink="/user/view-events">
+        <span nz-icon nzType="eye"></span>
+        <span><strong>Ver eventos</strong></span>
+      </li>
+      <li nz-menu-item (click)="logout()">
+        <span nz-icon nzType="logout"></span>
+        <span><strong>Logout</strong></span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <!-- <nz-header style="background-color: green;">
+      </nz-header> -->
+      <!-- Header showing the logged-in user name -->
+    <nz-header *ngIf="isUserLoggedIn" class="username" >
+      <div>Seja bem vindo, {{loggedInUserName}}!</div>
+    </nz-header>
+    <nz-content>
+      <router-outlet></router-outlet>
+    </nz-content>
+    <!-- <nz-footer>Ant Design ©2020 Implement By Angular</nz-footer> -->
+    <nz-footer></nz-footer>
+  </nz-layout>
+</nz-layout>

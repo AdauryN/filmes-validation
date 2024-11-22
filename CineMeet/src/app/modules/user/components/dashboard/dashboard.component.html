@@ -1,0 +1,25 @@
+<div class="parent">
+      <div class="showroom-cards">
+        <nz-empty style="text-align: center; margin-top: 20px;" *ngIf="users.length == 0"></nz-empty>
+        <nz-row [nzGutter]="16">
+          <nz-col *ngFor="let user of users" nzSpan="8">
+            <nz-card nzTitle="{{ user.name }}" nzBordered="false" [nzHoverable]="true">
+              <p><nz-rate disabled [ngModel]="user.rating"></nz-rate> <span class="ant-rate-text">{{ user.rating ? tooltips[user.rating - 1] : '' }}</span></p>
+              <p><i nz-icon nzType="calender" nzTheme="outline"></i> Eventos organizados: {{ user.eventsHosted }}</p>
+              <p><i nz-icon nzType="idcard" nzTheme="outline"></i> Email: {{ user.email }}</p>
+            
+              <nz-space style="margin-top: 16px; float: right;">
+                <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View" 
+                (click)="sendFriendRequest(user.id)">
+                  <i nz-icon nzType="user-add" nzTheme="outline"></i>
+                </button>
+                
+              </nz-space>
+            </nz-card>
+          </nz-col>
+        </nz-row>
+      </div>
+      
+    
+      </div>
+      

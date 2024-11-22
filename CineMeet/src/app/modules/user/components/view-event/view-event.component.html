@@ -1,0 +1,182 @@
+<nz-modal [(nzVisible)]="isVisible" nzTitle="Request to Join" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+    <ng-container *nzModalContent>
+        <textarea rows="4" nz-input [(ngModel)]="inputValue" placeholder="Qual comida/bebida você vai levar?"></textarea>
+    </ng-container>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="isVisibleReview" nzTitle="Review the host" (nzOnCancel)="handleCancelReview()" (nzOnOk)="handleOkReview()">
+    <ng-container *nzModalContent>
+        <form nz-form [formGroup]="reviewForm">
+            <div nz-row>
+                <div nz-col nzSpan="24">
+                    <nz-form-item>
+                        <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Essa input é obrigatória!">
+                            <nz-rate formControlName="rating"></nz-rate>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div nz-col nzSpan="24">
+                <nz-form-item>
+                    <nz-form-control nzHasFeedback [nzXs]="24" nzErrorTip="Essa input é obrigatória!">
+                        <textarea rows="5" nz-input placeholder="Faça uma review!"
+                            formControlName="review"></textarea>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+        </form>
+    </ng-container>
+</nz-modal>
+
+<div class="parent">
+    <div class="showroom-cards">
+        <nz-row [nzGutter]="16">
+            <nz-col nzSpan="8">
+                <nz-card nzTitle="{{ event.title }}" nzBordered="false" [nzHoverable]="true">
+
+                    <!-- Event Image -->
+                    <div class="event-image">
+                        <img [src]="event.movieImgUrl" alt="{{ event.movieName }}"
+                            style="width: 100%; height: auto; border-radius: 4px;" />
+                    </div>
+
+                    <!-- Event Details -->
+                    <p>
+                        <i nz-icon nzType="calendar" nzTheme="outline"></i>
+                        Date: {{ event.date | date: 'medium' }}
+                    </p>
+                    <p>
+                        <i nz-icon nzType="profile" nzTheme="outline"></i>
+                        Description: {{ event.description }}
+                    </p>
+                    <p>
+                        <i nz-icon nzType="video-camera" nzTheme="outline"></i>
+                        Movie: {{ event.movieName }}
+                    </p>
+                    <p>
+                        <i nz-icon nzType="user" nzTheme="outline"></i>
+                        Host: {{ event.userName }}
+                    </p>
+
+                    <!-- Action Buttons -->
+                    <!-- <nz-space style="margin-top: 16px; float: right;">
+              <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View Details" (click)="viewEvent(event.id)">
+                <i nz-icon nzType="eye" nzTheme="outline"></i>
+              </button>
+              <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="Share Event" (click)="shareEvent(event.id)">
+                <i nz-icon nzType="share-alt" nzTheme="outline"></i>
+              </button>
+            </nz-space> -->
+                </nz-card>
+            </nz-col>
+            <nz-col nzSpan="16">
+
+                <nz-alert *ngIf="myRequest != null && myRequest.status == 'DISAPPROVED'" style="margin-bottom: 20px;"
+                    nzType="error" nzMessage="Request Rejected"
+                    nzDescription="Infelizmente, o host rejeitou sua presença."
+                    nzShowIcon>
+                </nz-alert>
+
+                <nz-alert *ngIf="myRequest != null && myRequest.status == 'PENDING'" style="margin-bottom: 20px;"
+                    nzType="info" nzMessage="Request Pending"
+                    nzDescription="Request de presença enviada! Aguarde até o host aceitá-la."
+                    nzShowIcon>
+                </nz-alert>
+
+                <nz-alert *ngIf="myRequest != null && myRequest.status == 'APPROVED'" style="margin-bottom: 20px;"
+                nzType="success" nzMessage="Request Approved"
+                    nzDescription="O host aprovou sua presença! Não esqueça de levar comida pro evento!"
+                    nzShowIcon>
+                </nz-alert>
+
+                <button nz-button nzType="primary" nzBlock (click)="showModal()">Solicitar participação</button>
+                <button nz-button nzType="primary"  (click)="showModalReview()"
+                nzBlock style="margin-top: 10px;" *ngIf="myRequest != null && myRequest.status == 'APPROVED' && isEventPast">Avalie o
+                    Evento</button>
+
+                <span *ngIf="event.userId==loggedInUser">
+                    <h3 style="margin-top: 30px;">Pedidos de participação</h3>
+                    <nz-table #basicTable [nzData]="pendingOrCanceledRequests"
+                        style="margin-top: 10px; border-radius: 5px;">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Status da participação</th>
+                                <th>Comida/bebida</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of basicTable.data">
+                                <td>{{data.userName}}</td>
+                                <td>
+                                    <nz-tag nzColor="processing" *ngIf="data.status == 'PENDING'">
+                                        <span nz-icon nzType="sync" nzSpin></span>
+                                        <span>Pendente</span>
+                                    </nz-tag>
+                                    <nz-tag nzColor="error" *ngIf="data.status == 'DISAPPROVED'">
+                                        <span nz-icon nzType="close-circle"></span>
+                                        <span>Rejeitado</span>
+                                    </nz-tag>
+                                </td>
+                                <td>{{data.whatBringing}}
+
+                                </td>
+                                <td>
+                                    <span *ngIf="data.status != 'DISAPPROVED'">
+                                        <button nz-button nzType="primary"
+                                            (click)="updateRequestStatus(data.id, 'APPROVED')" [disabled]="isEventPast">
+                                            <span nz-icon nzType="check-circle"></span>
+                                            Aprovar
+                                        </button>
+                                        <nz-divider nzType="vertical"></nz-divider>
+                                        <button nz-button nzType="primary" nzDanger
+                                            (click)="updateRequestStatus(data.id, 'DISAPPROVED')" [disabled]="isEventPast">
+                                            <span nz-icon nzType="close-circle"></span>
+                                            Rejeitar
+                                        </button>
+                                    </span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </span>
+
+                <span>
+                    <h3 style="margin-top: 20px;">Coming Users to this event</h3>
+                    <nz-table #basicTable [nzData]="approvedRequests" style="margin-top: 10px; border-radius: 5px;">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Comida/bebida</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of basicTable.data">
+                                <td>{{data.userName}}</td>
+                                <td>
+                                    {{data.userEmail}}
+                                </td>
+                                <td>{{data.whatBringing}}
+
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </nz-table>
+                </span>
+            </nz-col>
+        </nz-row>
+    </div>
+
+    <nz-row [nzGutter]="16">
+        <nz-col *ngFor="let review of reviews" nzSpan="8">
+          <nz-card nzTitle="{{ review.reviewerName }}" nzBordered="false" [nzHoverable]="true">
+            <p><nz-rate disabled [ngModel]="review.rating"></nz-rate> <span class="ant-rate-text">{{ review.rating ? tooltips[review.rating - 1] : '' }}</span></p>
+            <p><i nz-icon nzType="idcard" nzTheme="outline"></i> Review: {{ review.review }}</p>
+          </nz-card>
+        </nz-col>
+      </nz-row>
+</div>

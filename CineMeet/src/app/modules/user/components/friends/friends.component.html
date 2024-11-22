@@ -1,0 +1,105 @@
+<!-- <div>
+    <h3>Send Friend Request</h3>
+    <input #friendId type="number" placeholder="Enter friend ID" />
+    <button (click)="sendFriendRequest(friendId.value)">Send Request</button>
+  </div> -->
+
+
+
+<div class="parent">
+
+
+  <div class="showroom-cards">
+    <h3>Pedidos de amizade pendentes</h3>
+    <nz-row [nzGutter]="16">
+      <nz-empty style="width: 100%;" *ngIf="friendRequests.length == 0"></nz-empty>
+      <nz-col *ngFor="let request of friendRequests" nzSpan="8">
+        <nz-card nzTitle="{{ request.userName }}" nzBordered="false" [nzHoverable]="true"
+          *ngIf="userId == request.friendId">
+          <p><i nz-icon nzType="idcard" nzTheme="outline"></i> Email: {{ request.userEmail }}</p>
+          <p><i nz-icon nzType="clock-circle" nzTheme="outline"></i> Status:
+            <nz-tag *ngIf="request.status == 'REJECTED'" [nzColor]="'#f50'">Rejeitado</nz-tag>
+            <nz-tag *ngIf="request.status == 'PENDING'" [nzColor]="'#2db7f5'">Aceito</nz-tag>
+          </p>
+
+          <span *ngIf="request.status == 'PENDING'">
+            <nz-space style="margin-top: 16px; float: right;" *ngIf="userId == request.friendId">
+              <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View"
+                (click)="respondToFriendRequest(request.id, 'ACCEPTED')">
+                <i nz-icon nzType="check" nzTheme="outline"></i>
+              </button>
+              <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View"
+                (click)="respondToFriendRequest(request.id, 'REJECTED')">
+                <i nz-icon nzType="close" nzTheme="outline"></i>
+              </button>
+            </nz-space>
+          </span>
+        </nz-card>
+
+        <nz-card nzTitle="{{ request.friendName }}" nzBordered="false" [nzHoverable]="true"
+          *ngIf="userId == request.userId">
+          <p><i nz-icon nzType="idcard" nzTheme="outline"></i> Email: {{ request.friendEmail }}</p>
+          <p><i nz-icon nzType="clock-circle" nzTheme="outline"></i> Status:
+            <nz-tag *ngIf="request.status == 'REJECTED'" [nzColor]="'#f50'">Rejeitado</nz-tag>
+            <nz-tag *ngIf="request.status == 'PENDING'" [nzColor]="'#2db7f5'">Pendente</nz-tag>
+          </p>
+
+          <span *ngIf="request.status == 'PENDING'">
+            <nz-space style="margin-top: 16px; float: right;" *ngIf="userId == request.friendId">
+              <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View"
+                (click)="respondToFriendRequest(request.id, 'ACCEPTED')">
+                <i nz-icon nzType="check" nzTheme="outline"></i>
+              </button>
+              <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View"
+                (click)="respondToFriendRequest(request.id, 'REJECTED')">
+                <i nz-icon nzType="close" nzTheme="outline"></i>
+              </button>
+            </nz-space>
+          </span>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+  </div>
+
+  <div class="showroom-cards">
+    <h3>Amigos</h3>
+    <nz-row [nzGutter]="16">
+      <nz-empty style="width: 100%;" *ngIf="friends.length == 0"></nz-empty>
+      <nz-col *ngFor="let request of friends" nzSpan="8">
+        <nz-card nzTitle="{{ request.userName }}" nzBordered="false" [nzHoverable]="true"
+          *ngIf="userId == request.friendId">
+          <p><i nz-icon nzType="idcard" nzTheme="outline"></i> Email: {{ request.userEmail }}</p>
+
+          <nz-space style="margin-top: 16px; float: right;">
+            <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View"
+              (click)="respondToFriendRequest(request.id, 'ACCEPTED')">
+              <i nz-icon nzType="eye" nzTheme="outline"></i>
+            </button>
+          </nz-space>
+        </nz-card>
+
+        <nz-card nzTitle="{{ request.friendName }}" nzBordered="false" [nzHoverable]="true"
+          *ngIf="userId == request.userId">
+          <p><i nz-icon nzType="idcard" nzTheme="outline"></i> Email: {{ request.friendEmail }}</p>
+
+          <nz-space style="margin-top: 16px; float: right;">
+            <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View"
+              (click)="respondToFriendRequest(request.id, 'ACCEPTED')">
+              <i nz-icon nzType="eye" nzTheme="outline"></i>
+            </button>
+          </nz-space>
+        </nz-card>
+      </nz-col>
+    </nz-row>
+  </div>
+
+  <!-- <div>
+    <h3>Friends</h3>
+    <ul>
+      <li *ngFor="let friend of friends">
+        Friend ID {{ friend.friendId }} - Status: {{ friend.status }}
+      </li>
+    </ul>
+  </div> -->
+
+</div>

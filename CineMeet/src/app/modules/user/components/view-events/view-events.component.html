@@ -1,0 +1,53 @@
+<div class="parent">
+    <div class="showroom-cards">
+
+      <nz-radio-group [(ngModel)]="radioValue" nzButtonStyle="solid" (ngModelChange)="typeChanged()" style="margin-bottom: 10px; ">
+        <label nz-radio-button nzValue="friends">Eventos de amigos</label>
+        <label nz-radio-button nzValue="all">Explore mais eventos</label>
+      </nz-radio-group>
+     
+      <nz-empty style="text-align: center; margin-top: 20px;" *ngIf="events.length == 0"></nz-empty>
+      <nz-row [nzGutter]="16">
+        
+        <nz-col *ngFor="let event of events" nzSpan="8">
+          <nz-card 
+            nzTitle="{{ event.title }}" 
+            nzBordered="false" 
+            [nzHoverable]="true">
+            
+            <!-- Event Image -->
+            <div class="event-image">
+              <img [src]="event.movieImgUrl" alt="{{ event.movieName }}" style="width: 100%; height: auto; border-radius: 4px;" />
+            </div>
+            
+            <!-- Event Details -->
+            <p>
+              <i nz-icon nzType="calendar" nzTheme="outline"></i>
+              Data: {{ event.date | date: 'medium' }}
+            </p>
+            <p>
+              <i nz-icon nzType="profile" nzTheme="outline"></i>
+              Descrição: {{ event.description }}
+            </p>
+            <p>
+              <i nz-icon nzType="video-camera" nzTheme="outline"></i>
+              Filme: {{ event.movieName }}
+            </p>
+            <p>
+              <i nz-icon nzType="user" nzTheme="outline"></i>
+              Host: {{ event.userName }}
+            </p>
+            
+            <!-- Action Buttons -->
+            <nz-space style="margin-top: 16px; float: right;">
+              <button nz-button nzType="default" nzShape="circle" nzTooltipTitle="View Details" routerLink="/user/view-event/{{event.id}}">
+                <i nz-icon nzType="eye" nzTheme="outline"></i>
+              </button>
+              
+            </nz-space>
+          </nz-card>
+        </nz-col>
+      </nz-row>
+    </div>
+  </div>
+  

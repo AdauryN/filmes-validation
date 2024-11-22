@@ -1,0 +1,52 @@
+/* car-showroom-list.component.css */
+/* Container for the filter and sort options */
+
+.parent{
+  min-height: 84.5vh;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: center;
+    padding: 10px;
+    margin-top: 20px;
+  }
+  
+  /* Sort buttons */
+  .sort-buttons {
+    display: flex;
+    gap: 8px;
+    margin-left: 8px;
+  }
+  
+
+
+.showroom-cards {
+    padding: 20px;
+  }
+  
+  nz-card {
+    background-color: #fafafa;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  
+  nz-card p {
+    margin: 8px 0;
+    font-size: 14px;
+  }
+  
+  nz-pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  nz-space button{
+    margin: 4px;
+  }
+  

@@ -1,0 +1,47 @@
+
+
+<div class="parent">
+    <div class="child">
+        <form nz-form [formGroup]="eventForm" class="login-form" (ngSubmit)="onSubmit()">
+
+            <nz-form-label [nzNoColon]="'true'">Título</nz-form-label>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Input inválida.">
+                    <input type="text" nz-input formControlName="title" placeholder="Título" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-label [nzNoColon]="'true'">Nome do filme</nz-form-label>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Input inválida.">
+                    <input type="text" nz-input formControlName="movieName" placeholder="Nome do filme" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-label [nzNoColon]="'true'">Url da imagem do filme</nz-form-label>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Input inválida.">
+                    <input type="text" nz-input formControlName="movieImgUrl" placeholder="Link da imagem do filme" />
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-label [nzNoColon]="'true'">Insira a data do evento</nz-form-label>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Contact number is required and must be up to 15 digits">
+                    <nz-date-picker style="width: 100%;" formControlName="date" placeholder="Contact Number"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-label [nzNoColon]="'true'">Descrição</nz-form-label>
+            <nz-form-item>
+                <nz-form-control nzErrorTip="Input inválida.">
+                    <textarea rows="4" nz-input formControlName="description" placeholder="Descrição"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+
+            <div style="padding-bottom: 30px;">
+                <button nz-button class="login-form-button login-form-margin" [nzType]="'primary'" >Enviar</button>
+            </div>
+        </form>
+    </div>
+</div>
