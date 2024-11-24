@@ -1,65 +1,66 @@
-# FilmesValidation
+FilmesValidation
 
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/yourusername/FilmesValidation/blob/main/LICENSE)
+Descrição
 
-## Description
+CineMeet é um site de filmes que tem o intúito de levar o cinema pra fora da sala de cinema!:
+	•	Organizar eventos de Watch Parties
+	•	Avaliar os eventos organizados
+	•	Determinar o que cada um dos participantes vai levar
+	•	Criar amizades com outros participantes dos eventos
 
-**FilmesValidation** is a movie website that uses the IMDB API to offer an interactive platform where users can:
+O objetivo do projeto é fornecer uma ferramenta divertida e fácil de usar para os amantes de cinema, permitindo que compartilhem suas opiniões e organizem eventos para assistir seus filmes favoritos com amigos.
 
-- Write movie reviews
-- Rate movies
-- Create custom movie lists
-- Organize watchparties for group viewing
+Design Patterns Utilizados
 
-The goal of the project is to provide a fun and easy-to-use tool for movie lovers, allowing them to share their opinions and organize events to watch their favorite films with friends.
+**Padrão Repository**
+Encapsula a lógica de acesso aos dados no banco de dados. Exemplos incluem:
+	•	FriendRepository para gerenciar amizades.
+	•	EventRepository para lidar com dados relacionados a eventos.
+ 
+**Padrão Strategy:**
+Define uma família de algoritmos e encapsula cada um, permitindo sua intercambialidade:
+	•	Serviços como FriendService e EventService usam interfaces para flexibilidade e múltiplas implementações.
+ 
+**Padrão Singleton**
+Garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global:
+	•	Usado na configuração do SimpleCorsFilter para aplicar configurações de CORS de forma consistente.
 
-## Features
+**Padrão Factory**
+Simplifica a criação de objetos e promove a reutilização:
+	•	Utilizado em DTOs como UserDTO e EventDTO para converter entidades em objetos transferíveis.
 
-- **User Registration and Login**: Users can sign up and log in to access the site's features.
-- **Movie Reviews**: Users can write and read reviews for films, in which their friends are able to see and react.
-- **Movie Ratings**: Users can give movies a rating from 1 to 5 stars based on their personal preferences.
-- **Custom Movie Lists**: Users can create custom lists such as "Best Action Movies", "Favorites of 2024", and more.
-- **Watchparties**: Users can organize watchparties where they notify their friends to watch movies together, either online or offline.
+Como Funciona
 
-## How It Works
+	1.	Watchparties: Os usuários podem organizar eventos presenciais para assistir filmes com outros usuários da plataforma.
+	2.  Resenhas e Avaliações: Usuários logados podem postar resenhas e avaliar eventos, que são exibidos na página principal.
+	3.	Amigos: Usuários podem criar e aceitar pedidos de amizade, e fazer eventos exclusivos para aqueles os quais estão adicionados.
+ 	4.	Comida!: Quando um usuário realizar uma request de participação de um evento, ele pode dizer se vai levar alguma comida.
 
-1. **IMDB Integration**: The site uses the public IMDB API to fetch data about movies, including synopses, cast information, ratings, and more.
-2. **Reviews and Ratings**: Logged-in users can post reviews and rate films, which are displayed on each movie's page.
-3. **Movie Lists**: Users can create and share movie lists, which can be set as public or private.
-4. **Watchparties**: Users can create events, invite other participants, and watch movies together in real-time, with live chat functionality to interact during the session.
+Protótipo LOFI
 
-## LOFI Prototype
+Link para o Figma
 
-Link to [Figma](https://www.figma.com/design/n3PJ0gcBey07Vh1IxvJ0Yc/REQUISITOS-%26-VALIDATION?node-id=0-1&t=2oQCk3nFQhPiw02i-1)
+Tecnologias Utilizadas
 
-## Technologies Used
+	•	Frontend: Angular
+	•	Backend: SpringBoot
+	•	BDD: Cucumber Gherkin
+	•	Outros: Jira
 
-- **Frontend**: TBD
-- **Backend**: SpringBoot
-- **Database**: MongoDB
-- **External API**: IMDB API
-- **BDD**: Cucumber Gherkin
-- **Others**: [Jira](https://cesar-team-je0lvctt.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-12&atlOrigin=eyJpIjoiN2EwMTc1ZTJmNGVhNDViMDllOWU1MzAzYTNkYTQ1NzgiLCJwIjoiaiJ9)
+Equipe
 
-## Canva Presentation
+A equipe da CESAR School que tornou isso possível e os parceiros de pair programming:
+	•	Adaury Oliveira
+	•	Demetrius Souza
+	•	Israel Erlich
+	•	João Pedro Araújo
+	•	João Pedro Batista
+	•	Lucas Lucena
+	•	Mathews Ivo
+	•	Rafael Menezes
+	•	Théo Moura
+	•	Vinícius Gonçalves
 
-Link to the slides presented in class: [Canva](https://www.canva.com/design/DAGSQ5Kasjo/C1DfnRvoabI0re7fqAfTlQ/edit)
+Licença
 
-## Team
-
-The team from CESAR School that made it possible, and each pair programming partners:
-
-- Adaury Oliveira
-- Demetrius Souza
-- Israel Erlich
-- João Pedro Araújo
-- João Pedro Batista
-- Lucas Lucena
-- Mathews Ivo
-- Rafael Menezes
-- Théo Moura
-- Vinícius Gonçalves
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more details.
+Este projeto está licenciado sob a Licença MIT. Consulte o arquivo LICENSE para mais detalhes.
