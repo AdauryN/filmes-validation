@@ -24,7 +24,7 @@ O objetivo do projeto é fornecer uma ferramenta divertida e fácil de usar para
 
 - **Padrão Singleton**  
   Garante que uma classe tenha apenas uma instância e fornece um ponto de acesso global:  
-  - Usado na configuração do `SimpleCorsFilter` para aplicar configurações de CORS de forma consistente.
+  - Usado, por exemplo, na classe `FriendServiceImpl` que está anotada com @Service. Isso faz com que o Spring crie um único bean dessa classe, garantindo que a mesma instância seja usada em toda a aplicação.
 
 - **Padrão Factory**  
   Simplifica a criação de objetos e promove a reutilização:  
