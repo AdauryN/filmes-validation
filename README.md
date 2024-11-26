@@ -14,7 +14,8 @@ O objetivo do projeto é fornecer uma ferramenta divertida e fácil de usar para
 ## Showcase da aplicação:
 
 [Video de demonstração/tutorial](https://youtu.be/7DOyyoy7WQE?feature=shared)
-
+## Apresentação de slides:
+Slides [Cinemeet](https://www.canva.com/design/DAGXhLVCruY/WROB8M1Gs3rTwCUSnMPnhQ/view?utm_content=DAGXhLVCruY&utm_campaign=designshare&utm_medium=link&utm_source=editor)
 ## Design Patterns Utilizados
 
 - **Padrão Repository**  
