@@ -62,6 +62,10 @@ Executar o frontend, a pasta CineMeet:
 
 Após isso, só abrir o localhost e utilizar o site.
 
+## Organização
+
+[Jira](https://cesar-team-je0lvctt.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-12&atlOrigin=eyJpIjoiN2EwMTc1ZTJmNGVhNDViMDllOWU1MzAzYTNkYTQ1NzgiLCJwIjoiaiJ9)
+
 ## Equipe
 
 A equipe da CESAR School que tornou isso possível e os parceiros de pair programming:
