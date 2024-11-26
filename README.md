@@ -44,6 +44,24 @@ O objetivo do projeto é fornecer uma ferramenta divertida e fácil de usar para
 - **BDD**: Cucumber Gherkin
 - **Outros**: Jira
 
+## Instalação e como rodar:
+
+```brew install mysql```
+
+```brew install node```
+
+Iniciar o mySQL:
+
+```brew services start mysql```
+
+Rodar o CineMeetServer após a iniciação do mysql.
+
+Executar o frontend, a pasta CineMeet:
+
+```ng serve```
+
+Após isso, só abrir o localhost e utilizar o site.
+
 ## Equipe
 
 A equipe da CESAR School que tornou isso possível e os parceiros de pair programming:
