@@ -66,6 +66,10 @@ Após isso, só abrir o localhost e utilizar o site.
 
 [Jira](https://cesar-team-je0lvctt.atlassian.net/jira/software/projects/SCRUM/boards/1?selectedIssue=SCRUM-12&atlOrigin=eyJpIjoiN2EwMTc1ZTJmNGVhNDViMDllOWU1MzAzYTNkYTQ1NzgiLCJwIjoiaiJ9)
 
+## LOFI Prototype
+
+[Figma](https://www.figma.com/design/n3PJ0gcBey07Vh1IxvJ0Yc/REQUISITOS-%26-VALIDATION?node-id=0-1&t=2oQCk3nFQhPiw02i-1)
+
 ## Equipe
 
 A equipe da CESAR School que tornou isso possível e os parceiros de pair programming:
