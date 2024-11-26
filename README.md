@@ -11,6 +11,10 @@
 
 O objetivo do projeto é fornecer uma ferramenta divertida e fácil de usar para os amantes de cinema, permitindo que compartilhem suas opiniões e organizem eventos para assistir seus filmes favoritos com amigos.
 
+## Showcase da aplicação:
+
+[Video de demonstração/tutorial](https://youtu.be/7DOyyoy7WQE?feature=shared)
+
 ## Design Patterns Utilizados
 
 - **Padrão Repository**  
