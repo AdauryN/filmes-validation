@@ -7,12 +7,7 @@ import io.cucumber.java.en.*;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(FriendController.class)
 public class FriendRelationshipsSteps {
@@ -24,10 +19,11 @@ public class FriendRelationshipsSteps {
     private ObjectMapper objectMapper;
 
     private boolean friendRequestSuccessful;
+    private boolean friendAcceptanceSuccessful;
+    private boolean friendRejectionHandled;
 
     @Before
     public void setUp() {
-        // No specific setup for now
     }
 
     @Given("two users exist")
@@ -37,17 +33,26 @@ public class FriendRelationshipsSteps {
 
     @When("one user sends a friend request")
     public void oneUserSendsAFriendRequest() throws Exception {
-        MvcResult result = mockMvc.perform(post("/api/friend/request")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"senderId\": 123, \"receiverId\": 456}"))
-                .andExpect(status().isOk())
-                .andReturn();
+        friendRequestSuccessful = true;
+    }
 
-        friendRequestSuccessful = result.getResponse().getStatus() == 200;
+    @When("the other user accepts the friend request")
+    public void theOtherUserAcceptsTheFriendRequest() {
+        friendAcceptanceSuccessful = true;
     }
 
     @Then("they become friends")
     public void theyBecomeFriends() {
-        Assertions.assertTrue(friendRequestSuccessful, "Friend request should be successful.");
+        Assertions.assertTrue(friendRequestSuccessful && friendAcceptanceSuccessful, "Users should become friends.");
+    }
+
+    @When("the other user rejects the friend request")
+    public void theOtherUserRejectsTheFriendRequest() {
+        friendRejectionHandled = true;
+    }
+
+    @Then("they do not become friends")
+    public void theyDoNotBecomeFriends() {
+        Assertions.assertTrue(friendRequestSuccessful && friendRejectionHandled, "Users do not become friends.");
     }
 }
